@@ -19,4 +19,24 @@ os.system("cls) + enter
 
 ¡¡ Y listo !!
 
-🎓
+🎓Acceciendo al conjunto de respuestas
+
+-from polls.models import Question, Choice
+-q = Question.objects.get(pk=1)
+>>> q
+<Question: ¿Cuál es el mejor curso de Platzi?>
+>>> q.choice_set.all()
+<QuerySet []>
+>>> q.choice_set.create(choice_text="Curso Básico de Python", votes=0) 
+<Choice: Curso Básico de Python>
+>>> q.choice_set.create(choice_text="Curso de Fundamentos de Ingeniería de Software", votes=0)  
+<Choice: Curso de Fundamentos de Ingeniería de Software>
+>>> q.choice_set.create(choice_text="Curso Básico de Javascript", votes=0) 
+<Choice: Curso Básico de Javascript>
+>>> q.choice_set.all()
+<QuerySet [<Choice: Curso Básico de Python>, <Choice: Curso de Fundamentos de Ingeniería de Software>, <Choice: Curso Básico de Javascript>]>
+>>> q.choice_set.count()
+3   
+>>> from django.utils import timezone
+>>> Choice.objects.filter(question__pub_date__year=timezone.now().year)
+<QuerySet [<Choice: Curso Básico de Python>, <Choice: Curso de Fundamentos de Ingeniería de Software>, <Choice: Curso Básico de Javascript>]>
