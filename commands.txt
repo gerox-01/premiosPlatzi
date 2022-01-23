@@ -1,0 +1,22 @@
+🎓 El método filter:
+
+-Question.objects.filter(pk=3) : arroja un resultado pero si no tuviera un registro en el pk 3 bota un arreglo vacio 
+-Question.objects.filter(question_text__startswith="¿Cuál") : arroja un resultado en este caso, dos registros.
+-Question.objects.filter(pub_date__year=timezone.now().year) : arroja todos los registros dgitados en el año actual
+__gt = Mayor que
+__gte = Mayor o igual que
+__lt = Menor que
+__lte = Menos o igual que
+__startswith = Empieza con
+__endswith = Termina con
+|
+Les dejo el link donde podrán ver otros método para la búsqueda https://docs.djangoproject.com/en/4.0/ref/models/querysets/#field-lookups
+
+🎓 Para limpíar la pantalla o la terminal es de la siguiente manera:
+
+import os + enter
+os.system("cls) + enter
+
+¡¡ Y listo !!
+
+🎓
