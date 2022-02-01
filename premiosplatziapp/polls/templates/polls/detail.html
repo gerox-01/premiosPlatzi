@@ -1,33 +1,52 @@
-<form action="{% url 'polls:vote' question.id %}" method="post" enctype="multipart/form-data">
-{% comment %} Es una linea de código que nos sirve para que no nos hackeen el formulario con {% csrf_token %} {% endcomment %}
-    {% csrf_token %}
-    <fieldset>
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link rel="stylesheet" href="{% static 'polls/style.css' %}" />
+    <link rel="stylesheet" href="{% static 'polls/detail.css' %}" />
+
+    <title>{{ question.question_text }} 🗳</title>
+  </head>
+  <body>
+    <form
+      action="{% url 'polls:vote' question.id %}"
+      method="post"
+      enctype="multipart/form-data"
+    >
+      {% comment %} Es una linea de código que nos sirve para que no nos hackeen
+      el formulario con {% csrf_token %} {% endcomment %} {% csrf_token %}
+      <fieldset>
         <legend>{{ question.question_text }}</legend>
         {% if error_message %}
-            <p><strong>{{ error_message }}</strong></p>
-        {% endif %}
-        {% for choice in question.choice_set.all %}
+        <p><strong>{{ error_message }}</strong></p>
+        {% endif %} {% for choice in question.choice_set.all %}
         <label>
-                <input 
-                    type="radio" 
-                    name="choice" 
-                    id="choice{{ forloop.counter }}"
-                    value="{{ choice.id }}"
-                >
-                {{ choice.choice_text }}
-            </label>
-            <br>
+          <input
+            type="radio"
+            name="choice"
+            id="choice{{ forloop.counter }}"
+            value="{{ choice.id }}"
+          />
+          {{ choice.choice_text }}
+        </label>
+        <br />
         {% endfor %}
-    </fieldset>
-    <input type="submit" value="Vote">
-</form>
+      </fieldset>
+      <input type="submit" value="Vote" />
+    </form>
+  </body>
+</html>
 
-{% comment %} <h1>{{question.question_text}}</h1>
+{% comment %}
+<h1>{{question.question_text}}</h1>
 <ul>
-    {% for choice in question.choice_set.all %}
-        <li>
-            {{choice.choice_text}}
-        </li>
-    {% endfor %}
-</ul> {% endcomment %}
-
+  {% for choice in question.choice_set.all %}
+  <li>{{choice.choice_text}}</li>
+  {% endfor %}
+</ul>
+{% endcomment %}

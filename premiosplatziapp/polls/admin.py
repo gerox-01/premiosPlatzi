@@ -9,4 +9,12 @@ class ChoicesInline(admin.StackedInline):
 
 @admin.register(Question)
 class QuestionAdmin(admin.ModelAdmin):
+    fields = ["pub_date", "question_text"]
     inlines = (ChoicesInline,)
+    #Filtrar
+    list_filter = ["pub_date"]
+    #Ordenar
+    list_display = ["question_text", "pub_date", "was_published_recently"]
+    #Buscar
+    search_fields = ["question_text"]
+    

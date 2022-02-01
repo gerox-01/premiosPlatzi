@@ -69,4 +69,4 @@ def vote(request, question_id):
         selected_choice.save()
         #Redireccionamos a la vista results
         #Args es una tupla, por eso se pone la coma
-        return HttpResponseRedirect(reverse('polls:results', args=(question.id,)))
+        return HttpResponseRedirect(reverse('polls:results', args=(question.pk,)))
