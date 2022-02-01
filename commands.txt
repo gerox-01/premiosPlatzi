@@ -40,3 +40,40 @@ os.system("cls) + enter
 >>> from django.utils import timezone
 >>> Choice.objects.filter(question__pub_date__year=timezone.now().year)
 <QuerySet [<Choice: Curso Básico de Python>, <Choice: Curso de Fundamentos de Ingeniería de Software>, <Choice: Curso Básico de Javascript>]>
+
+
+🎓 Corrigiendo un error en was_published_recently
+
+ py manage.py shell
+Python 3.9.7 (tags/v3.9.7:1016ef3, Aug 30 2021, 20:19:38) [MSC v.1929 64 bit (AMD64)] on win32
+Type "help", "copyright", "credits" or "license" for more information.
+(InteractiveConsole)
+>>> import datetime
+>>> from django.utils import timezone
+>>> from polls.models import Question
+>>> q = Question(question_text="¿Quién es el mejor Course Director  de Platzi?", pub_date=timezone.now() + datetime.timedelta(days=30))
+>>> q.was_published_recently()
+True
+
+Podemos ver que aunque no es una fecha reciente, dice que si lo es!! 😣
+
+Acerca del Test:
+py manage.py test polls
+Found 1 test(s).
+Creating test database for alias 'default'...
+System check identified no issues (0 silenced).
+F
+======================================================================
+FAIL: test_was_published_recently_with_future_questions (polls.tests.QuestionModelTest)
+was_published_recently return False for questions whose pub_date is in the future
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\Gerox\Documents\Estudio\Cursos\Platzi\Curso Básico de Django con Python\premiosPlatzi\premiosplatziapp\polls\tests.py", line 18, in test_was_published_recently_with_future_questions
+    self.assertIs(future_question.was_published_recently(), False)
+AssertionError: True is not False
+
+----------------------------------------------------------------------
+Ran 1 test in 0.002s
+
+FAILED (failures=1)
+Destroying test database for alias 'default'...

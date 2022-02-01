@@ -13,7 +13,10 @@ class Question(models.Model):
 
     def was_published_recently(self):
         #timedelta es la diferencia de día entre la fecha actual y la fecha de publicación
-        return self.pub_date >= timezone.now() - datetime.timedelta(days=1)
+        #Código anterior
+        # return self.pub_date >= timezone.now() - datetime.timedelta(days=1)
+        #Código nuevo
+        return timezone.now() >= self.pub_date >= timezone.now() - datetime.timedelta(days=1)
 
 class Choice(models.Model):
     question = models.ForeignKey(Question, on_delete=models.CASCADE)
